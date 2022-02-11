@@ -1,0 +1,19 @@
+name: Resuable workflow test
+on: 
+  workflows_dispatch:
+ jobs:
+   do-it:
+      runs-on: unbuntu-latest
+      steps:
+        -uses: actions/checkout@v2
+        -name: run a one line script
+        run: echo hello, world!
+   javascriptactions:
+   uses: Akankshaanshu/hello-world-javascript-action2/.github/workflows/main.yml@main
+   with: 
+    who-to-greet: 'Akanksha'
+     - name: Get the output time
+        run: echo "The time was ${{ steps.hello.outputs.time }}"
+
+   
+ 
