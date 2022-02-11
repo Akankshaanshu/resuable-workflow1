@@ -1,20 +1,24 @@
-name: Call a reusable workflow
+name: Reusable workflow example
 
 on:
-  pull_request:
-    branches:
-      - main
+  workflow_call:
+    inputs:
+      username:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
 
 jobs:
-  call-workflow:
-    uses: octo-org/example-repo/.github/workflows/workflow-A.yml@v1
-
-  call-workflow-passing-data:
-    uses: octo-org/example-repo/.github/workflows/workflow-B.yml@main
-    with:
-      username: mona
-    secrets:
-      token: ${{ secrets.TOKEN }}
+  example_job:
+    name: Pass input and secrets to my-action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ./.github/actions/my-action
+        with:
+          username: ${{ inputs.username }}
+          token: ${{ secrets.token }}
 
  
    
